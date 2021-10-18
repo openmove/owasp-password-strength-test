@@ -151,7 +151,7 @@
       var i = 0;
       this.tests.required.forEach(function(test) {
         var err = test(password);
-        if (typeof err === 'string') {
+        if (err != null) {
           result.strong = false;
           result.errors.push(err);
           result.requiredTestErrors.push(err);
@@ -176,7 +176,7 @@
         var j = this.tests.required.length;
         this.tests.optional.forEach(function(test) {
           var err = test(password);
-          if (typeof err === 'string') {
+          if (err != null) {
             result.errors.push(err);
             result.optionalTestErrors.push(err);
             result.failedTests.push(j);
