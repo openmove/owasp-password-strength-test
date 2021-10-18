@@ -115,7 +115,7 @@
             return {
               'code': 'NUMBER',
               'message': 'Password must contain at least one number'
-            }
+            };
           }
         },
 
@@ -151,7 +151,8 @@
       var i = 0;
       this.tests.required.forEach(function(test) {
         var err = test(password);
-        if (err != null) {
+
+        if (typeof err !== 'undefined') {
           result.strong = false;
           result.errors.push(err);
           result.requiredTestErrors.push(err);
@@ -176,7 +177,7 @@
         var j = this.tests.required.length;
         this.tests.optional.forEach(function(test) {
           var err = test(password);
-          if (err != null) {
+          if (typeof err !== 'undefined') {
             result.errors.push(err);
             result.optionalTestErrors.push(err);
             result.failedTests.push(j);

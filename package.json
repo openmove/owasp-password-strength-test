@@ -14,7 +14,10 @@
   },
   "scripts": {
     "test": "mocha --recursive --reporter spec test.js",
-    "lint": "jshint *.js"
+    "lint": "jshint *.js",
+    "preversion": "npm test && npm run lint",
+    "version": "git add -A .",
+    "postversion": "git push --all; git push --tags"
   },
   "repository": {
     "type": "git",
