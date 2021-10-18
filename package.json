@@ -11,7 +11,7 @@
   "jshintConfig": {
     "expr": true,
     "laxbreak": true
-   },
+  },
   "scripts": {
     "test": "mocha --recursive --reporter spec test.js",
     "lint": "jshint *.js"

@@ -1,6 +1,6 @@
 /* globals define */
 (function (root, factory) {
-  
+
   if (typeof define === 'function' && define.amd) {
     define([], factory);
   } else if (typeof exports === 'object') {
@@ -42,21 +42,34 @@
         // enforce a minimum length
         function(password) {
           if (password.length < owasp.configs.minLength) {
-            return 'The password must be at least ' + owasp.configs.minLength + ' characters long.';
+
+            return {
+              'code': 'MINLENGTH',
+              'message': 'Password is too short',
+              'config': owasp.configs.minLength
+            };
           }
         },
 
         // enforce a maximum length
         function(password) {
           if (password.length > owasp.configs.maxLength) {
-            return 'The password must be fewer than ' + owasp.configs.maxLength + ' characters.';
+
+            return {
+              'code': 'MAXLENGTH',
+              'message': 'Password is too long',
+              'config': owasp.configs.maxLength
+            };
           }
         },
 
         // forbid repeating characters
         function(password) {
           if (/(.)\1{2,}/.test(password)) {
-            return 'The password may not contain sequences of three or more repeated characters.';
+            return {
+              'code': 'REPETITION',
+              'message': 'Password contains 3 or more repeated characters'
+            };
           }
         },
 
@@ -76,28 +89,43 @@
         // require at least one lowercase letter
         function(password) {
           if (!/[a-z]/.test(password)) {
-            return 'The password must contain at least one lowercase letter.';
+
+            return {
+              'code': 'LOWERCASE',
+              'message': 'Password must contain at least one lowercase letter'
+            };
           }
         },
 
         // require at least one uppercase letter
         function(password) {
           if (!/[A-Z]/.test(password)) {
-            return 'The password must contain at least one uppercase letter.';
+
+            return {
+              'code': 'UPPERCASE',
+              'message': 'Password must contain at least one uppercase letter'
+            };
           }
         },
 
         // require at least one number
         function(password) {
           if (!/[0-9]/.test(password)) {
-            return 'The password must contain at least one number.';
+
+            return {
+              'code': 'NUMBER',
+              'message': 'Password must contain at least one number'
+            }
           }
         },
 
         // require at least one special character
         function(password) {
           if (!/[^A-Za-z0-9]/.test(password)) {
-            return 'The password must contain at least one special character.';
+            return {
+              'code': 'SPECIAL',
+              'message': 'Password must contain at least one special character'
+            };
           }
         },
 
